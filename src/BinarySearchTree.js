@@ -187,7 +187,36 @@ class BinarySearchTree {
     return this.left._findMin();
   }
 
+  countLeaves(leaves = 0) {
+    // base case: current node has no children
+    if (this === null) {
+      return leaves;
+    }
 
+    // recursive case:
+    const newLeaves = leaves + 1
+
+    //if node has no children add new leaf for current node
+    if (this.left === null && this.right === null) {
+      return 1;
+    }
+
+    // if no left child, recurse down the right subtree
+    if (!this.left) {
+      return this.right.countLeaves(newLeaves);
+    }
+
+    // if no right child, recurse down the left subtree
+    if (!this.right) {
+      return this.left.countLeaves(newLeaves);
+    }
+
+    // if node has both children, recurse down both
+    const leftLeaves = this.left.countLeaves(newLeaves);
+    const rightLeaves = this.right.countLeaves(newLeaves);
+
+    return rightLeaves + leftLeaves;
+  }
 }
 
 module.exports = BinarySearchTree;
