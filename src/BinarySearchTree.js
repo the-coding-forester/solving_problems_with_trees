@@ -144,14 +144,26 @@ class BinarySearchTree {
     return values[values.length - k];
   }
 
-  countLeaves(count = 0) {
-    // your solution here
-    return count;
-  }
+  //I didn't see the shell and wrote this at the bottom
+  // countLeaves(count = 0) {
+  //   // your solution here
+  //   return count;
+  // }
 
   isBalancedBST() {
     // your solution here
-    return 0;
+    if (!this.left && !this.right) {
+      return 0;
+    }
+
+    let leftHeight = this.left.getHeight();
+    let rightHeight = this.right.getHeight();
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return -1
+    }
+
+    return this.getHeight()
   }
 
   _replaceWith(node) {
